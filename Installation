@@ -1,0 +1,10 @@
+* You might want to make sure you have the latest version of npm and node:
+- npm install -g npm
+- npm install -g node
+
+* npm init vue@latest - install latest version of vue
+* cd {name of your project}
+* npm install
+* npm run dev
+
+* npm run build - When you are ready to ship the app.
