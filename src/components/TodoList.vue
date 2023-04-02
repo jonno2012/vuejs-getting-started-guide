@@ -14,7 +14,7 @@
   </ul>
   <input type="text" v-model="text">
   <br>
-  <button @click="addTodo">Add todo</button>
+  <button @click="addTodo" class="whatever" :class="textClass">Add todo</button>
   <div><button @click="hideDoneTodos = !hideDoneTodos">{{ hideDoneTodos ? 'Show' : 'Hide'}} completed todos</button></div>
   <br><br>
   <p>{{ text }}</p>
@@ -22,6 +22,7 @@
   <button @click="externalTodoId++">Fetch external todo {{ externalTodoId+1 }}</button>
   <div v-if="loadExternalTodo">Loading External To do...</div>
   <p v-if="externalTodo">{{ externalTodo }}</p>
+  <p><button @click="textState = !textState">Toggle Text State</button></p>
 </template>
 
 <script>
@@ -31,6 +32,7 @@ export default {
   data() {
     return {
       text: '',
+      textState: true,
       clicks: 0,
       todos: [
         {id: id++, text: 'Mow lawn', done: false},
@@ -78,6 +80,9 @@ export default {
     }
   },
   computed: {
+    textClass() {
+      return this.textState ? 'active' : 'static'
+    },
     filteredTodos() {
       return this.hideDoneTodos
           ? this.todos.filter((t) => t.done === false)
@@ -118,6 +123,14 @@ h3 {
 
 p {
   display: block;
+}
+
+.static {
+  color: red
+}
+
+.active {
+  color: green
 }
 
 .strikeThrough {
