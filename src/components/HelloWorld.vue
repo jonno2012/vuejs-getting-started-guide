@@ -3,6 +3,19 @@ defineProps({
   msg: {
     type: String,
     required: true
+  },
+  tester: {
+    type: String,
+    required: true
+  },
+  buttonDisabled: {
+    type: Boolean
+  },
+  message: {
+    type: String
+  },
+  showAbusiveMessage: {
+    type: Boolean
   }
 })
 </script>
@@ -10,10 +23,14 @@ defineProps({
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
+    {{ tester }}
     <h3>
-      You’ve successfully created a project with
+      You’ve successfully created a project <a :href="tester">with</a>
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
+      <button :disabled="buttonDisabled">Click Me!</button>
+      <p>{{ message.split('').reverse().join('') }}</p>
+      <p v-if="showAbusiveMessage">You baldy bastard</p>
     </h3>
   </div>
 </template>

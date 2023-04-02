@@ -1,14 +1,33 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-</script>
+import TodoList from "./components/TodoList.vue";
 
+</script>
+<script>
+export default {
+  data() {
+    return {
+      showLogo: true
+    }
+  }
+}
+</script>
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img v-if="showLogo" alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld
+          msg="You did it!"
+          tester="http://jrhilldev.com"
+          button-disabled=""
+          message="this will be backwards"
+          show-abusive-message="false"
+      />
+      <br>
+      <TodoList @showa="(visible) => showLogo = visible">Some text</TodoList>
+
     </div>
   </header>
 
