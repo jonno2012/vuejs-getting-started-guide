@@ -18,11 +18,11 @@
   <div><button @click="hideDoneTodos = !hideDoneTodos">{{ hideDoneTodos ? 'Show' : 'Hide'}} completed todos</button></div>
   <br><br>
   <p>{{ text }}</p>
-  <button @click="logoVisible = !logoVisible">Toggle Logo</button>
+  <button @click="logoVisible = !logoVisible" :class="classObject">Toggle Logo</button>
   <button @click="externalTodoId++">Fetch external todo {{ externalTodoId+1 }}</button>
   <div v-if="loadExternalTodo">Loading External To do...</div>
   <p v-if="externalTodo">{{ externalTodo }}</p>
-  <p><button @click="textState = !textState">Toggle Text State</button></p>
+  <p><button @click="textActive = !textActive">Toggle Text State</button></p>
 </template>
 
 <script>
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       text: '',
-      textState: true,
+      textActive: true,
       clicks: 0,
       todos: [
         {id: id++, text: 'Mow lawn', done: false},
@@ -43,7 +43,8 @@ export default {
       hideDoneTodos: false,
       logoVisible: true,
       externalTodo: null,
-      externalTodoId: 0
+      externalTodoId: 0,
+      isActive: true
     }
   },
   methods: {
@@ -81,12 +82,18 @@ export default {
   },
   computed: {
     textClass() {
-      return this.textState ? 'active' : 'static'
+      return this.textActive ? 'active' : 'static'
     },
     filteredTodos() {
       return this.hideDoneTodos
           ? this.todos.filter((t) => t.done === false)
           : this.todos
+    },
+    classObject() {
+      return {
+        active: this.isActive && !this.error,
+        'text-danger': this.error && this.error.type === 'fatal'
+      }
     }
   },
   emits: ['showa'],

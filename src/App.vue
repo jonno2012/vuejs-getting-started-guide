@@ -26,7 +26,7 @@ export default {
           show-abusive-message="false"
       />
       <br>
-      <TodoList @showa="(visible) => showLogo = visible">Some text</TodoList>
+      <TodoList @showa="(visible) => showLogo = visible" class="willBeAppliedToRootElementOfTemplate">Some text</TodoList>
 
     </div>
   </header>
